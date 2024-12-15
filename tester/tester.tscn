@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://d24yfke1s02mp"]
+
+[ext_resource type="Script" path="res://tester/animtester.gd" id="1_6d2pb"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6d2pb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+editor_description = "Set your sparrow xml spriteframes here to test your animations in-game."
+position = Vector2(345, 220)
+animation = &""
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 346.0
+offset_top = 17.0
+offset_right = 816.0
+offset_bottom = 74.0
+text = "Add a sparrow spritesheet and add its xml to AnimatedSprite2D as sprite_frames.
+Then run and you can preview the animations."
+
+[node name="AnimButtons" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+
+[node name="ButtonTemplate" type="Button" parent="CanvasLayer/AnimButtons"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
