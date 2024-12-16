@@ -10,7 +10,7 @@ Just add the .xml file relative to your image into your project and it should be
 
 ### Import Properties
 
-![Screenshot showing different importer properties.](asset-lib/screenshot_1.png)
+![Screenshot showing different importer properties.](https://github.com/user-attachments/assets/42576b10-bdfe-40d0-b4b2-d1f18ee22708)
 
 - use_offsets
     * Simply toggles whether or not `frameX`, `frameY`, `frameWidth`, and `frameHeight` are used in generating the SpriteFrames.
