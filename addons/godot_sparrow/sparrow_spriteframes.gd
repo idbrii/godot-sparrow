@@ -2,6 +2,8 @@
 class_name SparrowSpriteFrames extends EditorImportPlugin
 
 
+const DEFAULT_IS_LOOPED := false
+
 var sparrow_frame_class = preload('res://addons/godot_sparrow/sparrow_frame.gd')
 
 
@@ -39,7 +41,17 @@ func _get_import_options(path: String, preset_index: int):
 		{'name': 'animation_framerate', 'default_value': 24,
 				'property_hint': PROPERTY_HINT_RANGE,
 				'hint_string': '0,128,1,or_greater'},
-		{'name': 'animations_looped', 'default_value': false},
+		{'name': 'animations_looped', 'default_value': DEFAULT_IS_LOOPED},
+		{'name': 'loop_suffix',
+			'default_value': '',
+			'property_hint': PROPERTY_HINT_PLACEHOLDER_TEXT,
+			'hint_string': 'Names ending with this string will loop.',
+		},
+		{'name': 'oneshot_suffix',
+			'default_value': '',
+			'property_hint': PROPERTY_HINT_PLACEHOLDER_TEXT,
+			'hint_string': 'Names ending with this string will not loop.',
+		},
 		{'name': 'store_external_spriteframes', 'default_value': false},]
 
 
@@ -190,8 +202,15 @@ func _import(source_file: String, save_path: String, options: Dictionary,
 		frame.animation = frame_data[1]
 
 		if not sprite_frames.has_animation(frame.animation):
+			var loop_suffix = options.get('loop_suffix', '')
+			var oneshot_suffix = options.get('oneshot_suffix', '')
+			var is_looped = options.get('animations_looped', DEFAULT_IS_LOOPED)
+			if not loop_suffix.is_empty() and frame.animation.ends_with(loop_suffix):
+				is_looped = true
+			elif not oneshot_suffix.is_empty() and frame.animation.ends_with(oneshot_suffix):
+				is_looped = false
 			sprite_frames.add_animation(frame.animation)
-			sprite_frames.set_animation_loop(frame.animation, options.get('animations_looped', false))
+			sprite_frames.set_animation_loop(frame.animation, is_looped)
 			sprite_frames.set_animation_speed(frame.animation, options.get('animation_framerate', 24))
 
 		sparrow_frames.push_back(frame)
