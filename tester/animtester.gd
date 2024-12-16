@@ -1,5 +1,8 @@
 extends Node2D
 
+# Your project doesn't need this file! It's just a simple tester to show your
+# your animations will import.
+
 @onready var sprite := $AnimatedSprite2D
 @onready var template := $"%ButtonTemplate"
 
